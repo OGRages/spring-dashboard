@@ -28,25 +28,29 @@
 <div class="container">
     <div class="col-sm-8 mt-3">
         <div class="card card-body">
-            <form>
-                <div class="mb-3 mt-3 d-flex">
-                    <select class="w-25 custom-select" id="ticket-category">
-                        <option value="payment_error">Payment Error</option>
-                        <option value="refund">Refund</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <input id="title" class="w-75 form-control mx-1" type="text" placeholder="Enter Subject"
-                           value="">
-                </div>
-                <div class="mb-3">
-                    <label for="ticket-details" class="form-label">Information:</label>
-                    <textarea class="form-control" id="ticket-details" rows="3"></textarea>
-                </div>
-                <button type="submit" class="w-100 btn btn-outline-primary">Create</button>
-            </form>
+            <h2>Tickets</h2>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Status</th>
+                    <th>Creation Date</th>
+                    <th>Response Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><a href="">Refund on product</a></td>
+                    <td>Opened</td>
+                    <td>1/10/2023 10:40 AM</td>
+                    <td>1/11/2023 1:24 PM</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
 </body>
 
 </html>
