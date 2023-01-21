@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringDashboardApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringDashboardApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringDashboardApplication.class, args);
+    }
 
 }

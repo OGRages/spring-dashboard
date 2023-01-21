@@ -1,11 +1,23 @@
 package me.yattaw.dashboard.entities.ticket;
 
-import jakarta.persistence.*;
+import lombok.Data;
 import me.yattaw.dashboard.entities.UserEntity;
 
+import jakarta.persistence.*;
 import java.util.Date;
 
+@Data
+@Entity
+@Table(name = "ticket_response")
 public class TicketResponseEntity {
+
+    @ManyToOne
+    @JoinColumn(name = "ticket_id", referencedColumnName = "ticket_id")
+    private TicketEntity ticketEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "tickets_id", referencedColumnName = "ticket_id")
+    private TicketEntity tickets;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

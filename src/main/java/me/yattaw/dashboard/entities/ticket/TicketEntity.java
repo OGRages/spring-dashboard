@@ -1,11 +1,13 @@
 package me.yattaw.dashboard.entities.ticket;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import me.yattaw.dashboard.entities.UserEntity;
 
 import java.util.Date;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "tickets")
 public class TicketEntity {

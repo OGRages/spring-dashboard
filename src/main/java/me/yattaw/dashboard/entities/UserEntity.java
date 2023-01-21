@@ -1,9 +1,11 @@
 package me.yattaw.dashboard.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity()
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class UserEntity {
 
     @Id
@@ -18,33 +20,5 @@ public class UserEntity {
 
     @Column(nullable = false, length = 16)
     private String username;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getUsername() {
-        return username;
-    }
 
 }
