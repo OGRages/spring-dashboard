@@ -3,11 +3,13 @@ package me.yattaw.dashboard.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
+
 @Controller
 public class HomeController {
 
     @GetMapping("/login")
-    private String login() {
+    public String login(Principal principal) {
         return "login";
     }
 
