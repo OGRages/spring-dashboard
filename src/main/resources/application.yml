@@ -1,0 +1,22 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  security:
+    user:
+      name: test
+      password: password
+      roles: USER
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_database
+    username: root
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    org:
+      springframework:
+        security: 'DEBUG'
