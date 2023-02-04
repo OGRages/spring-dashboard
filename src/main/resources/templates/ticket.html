@@ -128,25 +128,31 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Dashboard</h1>
                 </div>
-                <div class="row pt-5">
-                    <div class="col-sm-5">
-                        <h2>Announcements</h2>
+
+
+                <div class="container">
+                    <div class="col-sm-8 mt-3">
                         <div class="card card-body">
-                            <h4 class="card-title">Example Title</h4>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <div class="text-muted">Created: 1/11/2023</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <h2>Updates</h2>
-                        <div class="card card-body">
-                            <h4 class="card-title">First Release</h4>
-                            <p class="card-text">Created basic css for website.</p>
-                            <div class="text-muted">Created: 1/11/2023</div>
+                            <form>
+                                <div class="mb-3 mt-3 d-flex">
+                                    <select class="w-25 custom-select" id="ticket-category">
+                                        <option value="payment_error">Payment Error</option>
+                                        <option value="refund">Refund</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <input id="title" class="w-75 form-control mx-1" type="text" placeholder="Enter Subject"
+                                           value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ticket-details" class="form-label">Information:</label>
+                                    <textarea class="form-control" id="ticket-details" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="w-100 btn btn-outline-primary">Create</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+
             </div>
         </main>
     </div>

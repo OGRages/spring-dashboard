@@ -9,7 +9,7 @@ import java.security.Principal;
 public class HomeController {
 
     @GetMapping("/login")
-    public String login(Principal principal) {
+    public String login() {
         return "login";
     }
 
@@ -21,6 +21,16 @@ public class HomeController {
     @GetMapping("/home")
     private String home() {
         return "home";
+    }
+
+    @GetMapping("/ticket")
+    private String ticket() {
+        return "ticket";
+    }
+
+    @GetMapping("/tickets")
+    private String tickets() {
+        return "tickets";
     }
 
 }

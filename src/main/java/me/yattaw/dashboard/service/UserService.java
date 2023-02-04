@@ -38,14 +38,17 @@ public class UserService implements UserDetailsService {
     }
 
     public User saveUser(UserCreateRequest userRequest) {
-        return userRepository.save(
-                User.builder()
-                        .email(userRequest.email())
-                        .username(userRequest.username())
-                        .password(passwordEncoder.encode(userRequest.password()))
-                        .roles(Set.of(roleRepository.getRoleByName(RoleTypes.USER.getAuthority())))
-                        .build()
-        );
+        if (loadUserByUsername(userRequest.username()) == null) { // make sure that this user doesn't already exist
+            return userRepository.save(
+                    User.builder()
+                            .email(userRequest.email())
+                            .username(userRequest.username())
+                            .password(passwordEncoder.encode(userRequest.password()))
+                            .roles(Set.of(roleRepository.getRoleByName(RoleTypes.USER.getAuthority())))
+                            .build()
+            );
+        }
+        return null;
     }
 
 
