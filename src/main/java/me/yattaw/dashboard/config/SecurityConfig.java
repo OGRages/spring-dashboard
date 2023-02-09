@@ -45,7 +45,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .requestMatchers("/api/v1/auth/**", "/register").permitAll()
+                    .requestMatchers("/api/v1/auth/**", "/api/v1/ticket/**", "/register").permitAll()
                     .requestMatchers("/", "/home").hasAnyAuthority(RoleTypes.userAuthorities())
                     .requestMatchers("/ticket").hasAnyAuthority(RoleTypes.userAuthorities())
                     .requestMatchers("/tickets").hasAnyAuthority(RoleTypes.userAuthorities())

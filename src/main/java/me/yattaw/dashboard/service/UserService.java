@@ -40,7 +40,6 @@ public class UserService implements UserDetailsService {
 
     public User saveUser(UserCreateRequest userRequest) {
         if (userRepository.findByUsername(userRequest.username()).isPresent()) {
-            System.err.println("user already exists");
             return null;
         } else {
             return userRepository.save(

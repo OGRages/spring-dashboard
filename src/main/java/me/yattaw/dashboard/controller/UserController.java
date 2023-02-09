@@ -2,7 +2,6 @@ package me.yattaw.dashboard.controller;
 
 import me.yattaw.dashboard.entities.User;
 import me.yattaw.dashboard.requests.UserCreateRequest;
-import me.yattaw.dashboard.response.UserCreateResponse;
 import me.yattaw.dashboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,18 +23,19 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody UserCreateRequest request) {
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        Map<String, Object> map = new LinkedHashMap<>();
         User user = userService.saveUser(request);
         if (user != null) {
             map.put("status", 1);
+            map.put("message", "User has been registered Successfully!");
             map.put("username", request.username());
             map.put("email", request.email());
-            map.put("message", "User has been registered Successfully!");
+            return new ResponseEntity<>(map, HttpStatus.CREATED);
         } else {
             map.put("status", 0);
             map.put("message", "User already exists with that username or email!");
+            return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
 }
