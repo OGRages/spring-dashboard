@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class UserService implements UserDetailsService {
@@ -28,17 +29,20 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.getUserByName(username);
+        Optional<User> user = userRepository.findByUsername(username);
 
-        if (user == null) {
+        if (user == null || !user.isPresent()) {
             throw new UsernameNotFoundException("Could not find user: " + username);
         }
 
-        return new DashboardUserDetails(user);
+        return new DashboardUserDetails(user.get());
     }
 
     public User saveUser(UserCreateRequest userRequest) {
-        if (loadUserByUsername(userRequest.username()) == null) { // make sure that this user doesn't already exist
+        if (userRepository.findByUsername(userRequest.username()).isPresent()) {
+            System.err.println("user already exists");
+            return null;
+        } else {
             return userRepository.save(
                     User.builder()
                             .email(userRequest.email())
@@ -48,7 +52,6 @@ public class UserService implements UserDetailsService {
                             .build()
             );
         }
-        return null;
     }
 
 

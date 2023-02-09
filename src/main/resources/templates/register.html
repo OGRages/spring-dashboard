@@ -12,7 +12,7 @@ function submitForm() {
   let username = document.getElementById("username").value;
   let password = document.getElementById("password").value;
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", "/create", true);
+  xhr.open("POST", "/api/v1/auth/register", true);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = function() {
     if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -35,7 +35,7 @@ function submitForm() {
     <div class="row pt-5 justify-content-center">
         <div class="col-sm-8">
             <div class="card card-body">
-                <form th:action="@{/create}" th:method="post">
+                <form th:action="@{/api/v1/auth/register}" th:method="post">
                     <div class="mb-3 mt-3">
                         <label for="email" class="form-label">Email:</label>
                         <input type="text" class="form-control" id="email" placeholder="Enter email" name="email"

@@ -1,23 +1,41 @@
 package me.yattaw.dashboard.controller;
 
+import me.yattaw.dashboard.entities.User;
 import me.yattaw.dashboard.requests.UserCreateRequest;
 import me.yattaw.dashboard.response.UserCreateResponse;
 import me.yattaw.dashboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @RestController
+@RequestMapping("/api/v1/auth")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/create")
-    public UserCreateResponse createUser(@RequestBody UserCreateRequest request) {
-        userService.saveUser(request);
-        return new UserCreateResponse(request.email(), request.username());
+    @PostMapping("/register")
+    public ResponseEntity register(@RequestBody UserCreateRequest request) {
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        User user = userService.saveUser(request);
+        if (user != null) {
+            map.put("status", 1);
+            map.put("username", request.username());
+            map.put("email", request.email());
+            map.put("message", "User has been registered Successfully!");
+        } else {
+            map.put("status", 0);
+            map.put("message", "User already exists with that username or email!");
+        }
+        return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
 }
