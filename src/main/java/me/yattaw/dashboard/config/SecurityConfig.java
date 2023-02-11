@@ -1,6 +1,7 @@
 package me.yattaw.dashboard.config;
 
 import me.yattaw.dashboard.entities.RoleTypes;
+import me.yattaw.dashboard.service.TicketService;
 import me.yattaw.dashboard.service.UserService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
@@ -41,11 +42,17 @@ public class SecurityConfig {
     }
 
     @Bean
+    public TicketService ticketService() {
+        return new TicketService();
+    }
+
+    @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .requestMatchers("/api/v1/auth/**", "/api/v1/ticket/**", "/register").permitAll()
+                    .requestMatchers("/api/v1/auth/**", "/register").permitAll()
+                    .requestMatchers("/api/v1/ticket/**").hasAnyAuthority(RoleTypes.userAuthorities())
                     .requestMatchers("/", "/home").hasAnyAuthority(RoleTypes.userAuthorities())
                     .requestMatchers("/ticket").hasAnyAuthority(RoleTypes.userAuthorities())
                     .requestMatchers("/tickets").hasAnyAuthority(RoleTypes.userAuthorities())
