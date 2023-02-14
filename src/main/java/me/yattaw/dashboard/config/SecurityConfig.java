@@ -1,5 +1,6 @@
 package me.yattaw.dashboard.config;
 
+import jakarta.servlet.http.HttpSessionBindingEvent;
 import me.yattaw.dashboard.entities.RoleTypes;
 import me.yattaw.dashboard.service.TicketService;
 import me.yattaw.dashboard.service.UserService;

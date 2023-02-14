@@ -9,6 +9,7 @@ import me.yattaw.dashboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
@@ -22,13 +23,14 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping("/create")
-    public ResponseEntity create(@RequestBody TicketCreateRequest request) {
+    public ResponseEntity create(@RequestBody TicketCreateRequest request, Authentication authentication) {
         Map<String, Object> map = new LinkedHashMap<>();
-        Ticket ticket = ticketService.saveTicket(request);
-        if (ticket != null) {
+        Ticket ticket = ticketService.saveTicket(request, authentication);
+        if (ticket != null && authentication != null) {
             map.put("status", 1);
             map.put("message", "Ticket has been created Successfully!");
             map.put("subject", request.subject());
+            map.put("created_by", authentication.getName());
             return new ResponseEntity<>(map, HttpStatus.CREATED);
         } else {
             map.put("status", 0);
