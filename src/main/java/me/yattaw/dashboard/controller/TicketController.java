@@ -27,7 +27,6 @@ public class TicketController {
     public ResponseEntity create(@RequestBody TicketCreateRequest request, Authentication authentication) {
         Map<String, Object> map = new LinkedHashMap<>();
         Ticket ticket = ticketService.saveTicket(request, authentication);
-
         if (ticket != null) {
             map.put("status", 1);
             map.put("message", "Ticket has been created Successfully!");

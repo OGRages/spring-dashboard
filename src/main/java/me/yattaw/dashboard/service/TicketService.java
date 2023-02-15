@@ -19,6 +19,7 @@ public class TicketService {
     public Ticket saveTicket(TicketCreateRequest request, Authentication authentication) {
 
         Ticket ticket = Ticket.builder()
+                .opened(true)
                 .subject(request.subject())
                 .createdAt(LocalDateTime.now())
                 .createdBy(authentication.getName())

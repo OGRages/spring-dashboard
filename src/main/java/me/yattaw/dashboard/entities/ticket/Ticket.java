@@ -26,6 +26,9 @@ public class Ticket {
     @Size(min = 4, max = 256, message = "subject must be between 4 and 256 characters")
     private String subject;
 
+    @Column(name = "opened")
+    private boolean opened;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -35,6 +38,10 @@ public class Ticket {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "ticket_id")
     private List<TicketResponse> responses;
+
+    public LocalDateTime getLastResponse() {
+        return responses.get(responses.size() - 1).getCreatedAt();
+    }
 
 
 }

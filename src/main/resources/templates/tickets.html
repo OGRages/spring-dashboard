@@ -144,11 +144,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td><a href="">Refund on product</a></td>
-                                    <td>Opened</td>
-                                    <td>1/10/2023 10:40 AM</td>
-                                    <td>1/11/2023 1:24 PM</td>
+                                <tr th:each="ticket : ${tickets}">
+                                    <td><a th:href="@{/tickets/{id}(id=${ticket.id})}" th:utext="${ticket.subject}"></a></td>
+                                    <td th:utext="${ticket.opened ? 'Opened' : 'Closed'}"></td>
+                                    <td th:utext="${#temporals.format(ticket.createdAt, 'M/d/yyyy h:mm a')}"></td>
+                                    <td th:utext="${#temporals.format(ticket.getLastResponse, 'M/d/yyyy h:mm a')}"></td>
                                 </tr>
                                 </tbody>
                             </table>
