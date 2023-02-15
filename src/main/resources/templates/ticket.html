@@ -11,6 +11,7 @@
     <script>
 function submitForm() {
   let subject = document.getElementById("subject").value;
+  let information = document.getElementById("ticket-details").value;
   let xhr = new XMLHttpRequest();
   xhr.open("POST", "/api/v1/ticket/create", true);
   xhr.setRequestHeader("Content-Type", "application/json");
@@ -22,7 +23,8 @@ function submitForm() {
     }
   };
   xhr.send(JSON.stringify({
-    subject: subject
+    subject: subject,
+    information: information
   }));
 }
     </script>

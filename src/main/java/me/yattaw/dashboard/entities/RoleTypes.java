@@ -27,7 +27,10 @@ public enum RoleTypes {
     }
 
     public static final String[] adminAuthorities() {
-        return new String[]{ADMIN.getAuthority(), DEVELOPER.getAuthority()};
+        return new String[]{
+                ADMIN.getAuthority(),
+                DEVELOPER.getAuthority()
+        };
     }
 
 }

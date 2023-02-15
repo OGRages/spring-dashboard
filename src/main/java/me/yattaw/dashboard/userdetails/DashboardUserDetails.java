@@ -64,4 +64,7 @@ public class DashboardUserDetails implements UserDetails {
         return true;
     }
 
+    public User getUser() {
+        return user;
+    }
 }

@@ -1,6 +1,7 @@
 package me.yattaw.dashboard.entities.ticket;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Ticket {
     private Integer id;
 
     @Column(name = "subject")
+    @Size(min = 4, max = 256, message = "subject must be between 4 and 256 characters")
     private String subject;
 
     @Column(name = "created_at")
