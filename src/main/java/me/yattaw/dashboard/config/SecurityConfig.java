@@ -1,6 +1,5 @@
 package me.yattaw.dashboard.config;
 
-import jakarta.servlet.http.HttpSessionBindingEvent;
 import me.yattaw.dashboard.entities.RoleTypes;
 import me.yattaw.dashboard.service.TicketService;
 import me.yattaw.dashboard.service.UserService;
@@ -8,8 +7,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
@@ -25,8 +22,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -51,6 +46,9 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .authorizeRequests()
+                    .requestMatchers("/js/dashboard.js").permitAll()
+                .and()
                 .authorizeRequests()
                     .requestMatchers("/api/v1/auth/**", "/register").permitAll()
                     .requestMatchers("/api/v1/ticket/**").hasAnyAuthority(RoleTypes.userAuthorities())

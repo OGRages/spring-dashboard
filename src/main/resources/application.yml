@@ -1,4 +1,8 @@
 spring:
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -15,3 +19,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+resources:
+  chain:
+    strategy:
+      content-type: true
