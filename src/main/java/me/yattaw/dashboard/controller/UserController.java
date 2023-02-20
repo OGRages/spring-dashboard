@@ -24,6 +24,13 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody UserCreateRequest request) {
         Map<String, Object> map = new LinkedHashMap<>();
+
+        if (request.username().length() < 4 || request.username().length() > 16) {
+            map.put("status", 0);
+            map.put("message", "Username or email is unacceptable.");
+            return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+        }
+
         User user = userService.saveUser(request);
         if (user != null) {
             map.put("status", 1);
@@ -34,7 +41,7 @@ public class UserController {
         } else {
             map.put("status", 0);
             map.put("message", "User already exists with that username or email!");
-            return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(map, HttpStatus.CONFLICT);
         }
     }
 
