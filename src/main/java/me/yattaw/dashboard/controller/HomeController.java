@@ -37,6 +37,11 @@ public class HomeController {
         return "ticket";
     }
 
+    @GetMapping("/ticket-view")
+    private String ticketView() {
+        return "ticket-view";
+    }
+
     @GetMapping("/tickets")
     private String tickets(Model model, Authentication authentication) {
         List<Ticket> tickets = ticketRepository.findByCreatedBy(authentication.getName());
