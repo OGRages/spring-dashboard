@@ -1,5 +1,6 @@
 package me.yattaw.dashboard.entities.ticket;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ticket")
+@JsonIgnoreProperties("responses")
 public class Ticket {
 
     @Id

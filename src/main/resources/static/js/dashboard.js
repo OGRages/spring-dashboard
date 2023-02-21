@@ -1,16 +1,21 @@
 function submitForm(data, url, successUrl, response) {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 201) {
-                window.location.href = successUrl;
-            }
-            response(xhr.status);
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    })
+    .then(response => {
+        if (response.status === 201) {
+            window.location.href = successUrl;
         }
-    };
-    xhr.send(JSON.stringify(data));
+        return response.status;
+    })
+    .then(response)
+    .catch(error => {
+        console.error(error);
+    });
 }
 
 function registerUser() {
